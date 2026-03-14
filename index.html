@@ -1,157 +1,549 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aurum Restaurant & Cafe | Al Furjan</title>
-    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap');
-        
-        :root {
-            --gold: #C9A84C; --gold-lt: #E8C97A;
-            --ch: #111; --ch2: #1c1c1c; --cr: #F5F0E8; --mu: #88887f;
-            --serif: 'Cormorant Garamond', Georgia, serif;
-            --sans: 'DM Sans', sans-serif;
-            --ease: cubic-bezier(.22, 1, .36, 1);
-        }
-
-        body { background: var(--ch); color: var(--cr); font-family: var(--sans); overflow-x: hidden; }
-
-        /* Smooth Reveal Animations */
-        .rv { opacity: 0; transform: translateY(28px); transition: opacity .8s var(--ease), transform .8s var(--ease); }
-        .rv.in { opacity: 1; transform: none; }
-        .rv.d1 { transition-delay: .1s; } .rv.d2 { transition-delay: .22s; }
-
-        @keyframes shimmer { 0% { background-position: -200% center; } 100% { background-position: 200% center; } }
-        .shimmer {
-            background: linear-gradient(90deg, var(--gold) 25%, var(--gold-lt) 50%, var(--gold) 75%);
-            background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: shimmer 4s linear infinite;
-        }
-
-        @keyframes kb { 0% { transform: scale(1); } 100% { transform: scale(1.07); } }
-        .kb { animation: kb 20s ease-in-out infinite alternate; }
-        
-        .ghost { position: absolute; font-family: var(--serif); font-size: clamp(80px, 13vw, 170px); color: rgba(201,168,76,.04); z-index: 0; pointer-events: none; }
-        
-        .mc { transition: transform .3s; border: 1px solid rgba(201,168,76,.1); }
-        .mc:hover { transform: translateY(-5px); border-color: var(--gold); }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aurum Restaurant &amp; Cafe — Al Furjan, Dubai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A84C;--gold-lt:#E8C97A;
+  --ch:#111;--ch2:#1c1c1c;--ch3:#2a2a2a;
+  --cr:#F5F0E8;--mu:#88887f;
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--ch);color:var(--cr);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
+::-webkit-scrollbar{width:3px}
+::-webkit-scrollbar-track{background:var(--ch)}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+.rv{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.22s}.rv.d3{transition-delay:.34s}
+@keyframes shimmer{0%{background-position:-200% center}100%{background-position:200% center}}
+.shimmer{background:linear-gradient(90deg,var(--gold) 25%,var(--gold-lt) 50%,var(--gold) 75%);background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:shimmer 4s linear infinite}
+@keyframes fup{from{opacity:0;transform:translateY(36px)}to{opacity:1;transform:none}}
+.ht{animation:fup 1.2s var(--ease) .3s both}
+.hs{animation:fup 1.2s var(--ease) .6s both}
+.hc{animation:fup 1.2s var(--ease) .9s both}
+@keyframes kb{0%{transform:scale(1)}100%{transform:scale(1.07) translate(-1%,-.5%)}}
+.kb{animation:kb 20s ease-in-out infinite alternate}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.45)}50%{box-shadow:0 0 0 16px rgba(201,168,76,0)}}
+.pulse{animation:pulse 2.6s ease infinite}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.bob{animation:bob 2.2s ease-in-out infinite}
+@keyframes sd{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.mob{animation:sd .25s ease}
+.nl{position:relative}
+.nl::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--gold);transition:width .3s}
+.nl:hover::after{width:100%}
+.tb{transition:all .3s;border-bottom:2px solid transparent;cursor:pointer}
+.tb.on{border-bottom-color:var(--gold)!important;color:var(--gold)!important}
+.mc{transition:transform .3s,box-shadow .3s}
+.mc:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.gi{overflow:hidden;position:relative;cursor:pointer}
+.gi img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--ease),filter .6s;filter:brightness(.8)}
+.gi:hover img{transform:scale(1.07);filter:brightness(1)}
+.glabel{position:absolute;bottom:0;left:0;right:0;padding:22px 14px 12px;background:linear-gradient(to top,rgba(0,0,0,.72),transparent)}
+.glabel span{font-family:var(--sans);font-size:.65rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,240,232,.6)}
+.inp{background:var(--ch3);border:1px solid rgba(201,168,76,.2);color:var(--cr);font-family:var(--sans);font-size:.87rem;padding:13px 16px;width:100%;outline:none;border-radius:2px;transition:border-color .3s}
+.inp:focus{border-color:var(--gold)}
+.inp::placeholder{color:var(--mu)}
+.inp option{background:var(--ch3)}
+.ghost{position:absolute;font-family:var(--serif);font-size:clamp(80px,13vw,170px);font-weight:300;color:rgba(201,168,76,.04);line-height:1;pointer-events:none;user-select:none;letter-spacing:-.02em}
+button{cursor:pointer}
+@media(max-width:768px){
+  .dnav{display:none!important}
+  .hmb{display:flex!important}
+  .gg{grid-template-columns:repeat(2,1fr)!important;grid-auto-rows:160px!important}
+  .fg{grid-template-columns:1fr!important}
+  .sw{display:none!important}
+}
+</style>
 </head>
 <body>
-    <div id="root"></div>
 
-    <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+<!-- NAV -->
+<nav id="main-nav" style="position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(18px,5vw,64px);background:transparent;border-bottom:1px solid transparent;transition:background .4s,border-color .4s">
+  <div style="display:flex;align-items:center;justify-content:space-between;height:70px">
+    <button onclick="navTo('hero')" style="background:none;border:none;text-align:left;padding:0;cursor:pointer">
+      <div style="font-family:var(--serif);font-size:1.65rem;font-weight:300;letter-spacing:.14em;color:var(--gold);line-height:1">AURUM</div>
+      <div style="font-size:.5rem;letter-spacing:.38em;color:var(--mu);text-transform:uppercase;margin-top:2px">Restaurant &amp; Cafe</div>
+    </button>
+    <div class="dnav" style="display:flex;gap:32px;align-items:center">
+      <button onclick="navTo('story')"   class="nl" style="background:none;border:none;font-family:var(--sans);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cr);font-weight:400;padding:0">Story</button>
+      <button onclick="navTo('menu')"    class="nl" style="background:none;border:none;font-family:var(--sans);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cr);font-weight:400;padding:0">Menu</button>
+      <button onclick="navTo('gallery')" class="nl" style="background:none;border:none;font-family:var(--sans);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cr);font-weight:400;padding:0">Gallery</button>
+      <button onclick="navTo('reserve')" class="nl" style="background:none;border:none;font-family:var(--sans);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cr);font-weight:400;padding:0">Reserve</button>
+      <button onclick="navTo('reserve')" onmouseenter="this.style.background='var(--gold-lt)'" onmouseleave="this.style.background='var(--gold)'"
+        style="font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;background:var(--gold);color:var(--ch);padding:9px 22px;border:none;border-radius:2px;transition:background .25s">Book Now</button>
+    </div>
+    <button class="hmb" onclick="toggleMobile()" style="display:none;background:none;border:none;color:var(--cr);padding:4px;align-items:center">
+      <svg id="ico-open"  width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg id="ico-close" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div id="mob-menu" class="mob" style="display:none;background:var(--ch2);border-top:1px solid rgba(201,168,76,.1);padding-bottom:12px">
+    <button onclick="navTo('story');closeMobile()"   style="display:block;width:100%;text-align:left;padding:13px 0;background:none;border:none;border-bottom:1px solid rgba(255,255,255,.04);font-family:var(--sans);font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cr);font-weight:300">Story</button>
+    <button onclick="navTo('menu');closeMobile()"    style="display:block;width:100%;text-align:left;padding:13px 0;background:none;border:none;border-bottom:1px solid rgba(255,255,255,.04);font-family:var(--sans);font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cr);font-weight:300">Menu</button>
+    <button onclick="navTo('gallery');closeMobile()" style="display:block;width:100%;text-align:left;padding:13px 0;background:none;border:none;border-bottom:1px solid rgba(255,255,255,.04);font-family:var(--sans);font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cr);font-weight:300">Gallery</button>
+    <button onclick="navTo('reserve');closeMobile()" style="display:block;width:100%;text-align:left;padding:13px 0;background:none;border:none;border-bottom:1px solid rgba(255,255,255,.04);font-family:var(--sans);font-size:.82rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cr);font-weight:300">Reserve</button>
+    <button onclick="navTo('reserve');closeMobile()" onmouseenter="this.style.background='var(--gold-lt)'" onmouseleave="this.style.background='var(--gold)'"
+      style="margin-top:10px;width:100%;background:var(--gold);color:var(--ch);border:none;padding:13px 0;font-family:var(--sans);font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:500;border-radius:2px">Book a Table</button>
+  </div>
+</nav>
 
-        const IMG = {
-            hero: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80",
-            story: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80",
-            mBreak: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1400&q=75",
-            mLunch: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1400&q=75",
-            mDinner: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=75",
-            mCoffee: "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1400&q=75",
-            g1: "https://images.unsplash.com/photo-1550966871-3ed3cba5831f?w=900&q=75",
-            g2: "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=75"
-        };
+<!-- HERO -->
+<section id="hero" style="position:relative;height:100dvh;min-height:600px;overflow:hidden;display:flex;align-items:center;justify-content:center">
+  <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920&q=80" alt="Aurum interior" class="kb" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center" />
+  <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,.3),rgba(0,0,0,.1) 40%,rgba(0,0,0,.55))"></div>
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 28%,rgba(0,0,0,.5) 100%)"></div>
+  <div style="position:absolute;inset:0;background:rgba(20,12,0,.22)"></div>
+  <div style="position:absolute;bottom:0;left:0;right:0;height:38%;background:linear-gradient(to top,#111,transparent)"></div>
+  <div style="position:relative;z-index:1;text-align:center;padding:0 clamp(20px,6vw,80px);max-width:820px;width:100%">
+    <div class="hs" style="font-family:var(--sans);font-size:.7rem;letter-spacing:.44em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;justify-content:center;gap:14px">
+      <div style="width:26px;height:1px;background:var(--gold)"></div>Al Furjan, Dubai<div style="width:26px;height:1px;background:var(--gold)"></div>
+    </div>
+    <h1 class="ht" style="font-family:var(--serif);font-weight:300;font-size:clamp(54px,11vw,116px);line-height:1.02;letter-spacing:-.015em;margin-bottom:10px">
+      <span class="shimmer">Aurum</span><br>
+      <span style="font-style:italic;color:var(--cr);font-size:.68em;opacity:.88">Restaurant &amp; Cafe</span>
+    </h1>
+    <p class="hs" style="font-family:var(--serif);font-style:italic;font-size:clamp(.95rem,2vw,1.2rem);color:rgba(245,240,232,.62);line-height:1.85;max-width:460px;margin:0 auto 46px">
+      Where community warmth meets refined dining — crafted with golden intention.
+    </p>
+    <div class="hc" style="display:flex;gap:13px;justify-content:center;flex-wrap:wrap">
+      <button class="pulse" onclick="navTo('reserve')" onmouseenter="this.style.background='var(--gold-lt)'" onmouseleave="this.style.background='var(--gold)'"
+        style="display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:var(--ch);font-family:var(--sans);font-size:.74rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:15px 34px;border:none;border-radius:2px;transition:background .25s">
+        Book a Table
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <button onclick="navTo('menu')" onmouseenter="this.style.background='rgba(201,168,76,.08)'" onmouseleave="this.style.background='transparent'"
+        style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--gold);font-family:var(--sans);font-size:.74rem;font-weight:400;letter-spacing:.16em;text-transform:uppercase;padding:15px 34px;border:1px solid rgba(201,168,76,.4);border-radius:2px;transition:background .25s">Explore Menu</button>
+    </div>
+  </div>
+  <div class="bob" style="position:absolute;bottom:32px;left:50%;display:flex;flex-direction:column;align-items:center;gap:5px;color:rgba(201,168,76,.48)">
+    <span style="font-family:var(--sans);font-size:.56rem;letter-spacing:.3em;text-transform:uppercase">Scroll</span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+  </div>
+</section>
 
-        const MENU_DATA = {
-            Breakfast: [
-                { name: "Saffron Ricotta Toast", desc: "Whipped ricotta, saffron honey, candied walnuts.", price: "AED 55" },
-                { name: "Shakshuka Al Furjan", desc: "Slow-simmered tomato ragout, spiced eggs.", price: "AED 62" }
-            ],
-            Lunch: [
-                { name: "Wagyu Beef Sliders", desc: "Truffle aioli, caramelized onion, brioche.", price: "AED 128" }
-            ],
-            Dinner: [
-                { name: "Black Truffle Risotto", desc: "Carnaroli rice, aged parmesan, Périgord truffle.", price: "AED 185" }
-            ]
-        };
+<!-- STORY -->
+<section id="story" style="background:var(--ch);padding:clamp(80px,12vw,144px) clamp(18px,5vw,64px);position:relative;overflow:hidden">
+  <span class="ghost" style="top:-10px;right:-6px">01</span>
+  <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(36px,6vw,88px);align-items:center">
+    <div>
+      <div class="rv">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+          <span style="font-family:var(--serif);font-size:.8rem;color:var(--gold);letter-spacing:.15em">01</span>
+          <div style="width:28px;height:1px;background:var(--gold)"></div>
+          <span style="font-family:var(--sans);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mu)">Our Story</span>
+        </div>
+        <h2 style="font-family:var(--serif);font-size:clamp(36px,6vw,70px);font-weight:300;line-height:1.06;letter-spacing:-.015em">
+          The Meaning of<br><em class="shimmer">Aurum</em>
+        </h2>
+      </div>
+      <div class="rv d1">
+        <div style="display:flex;align-items:center;gap:12px;margin:22px 0">
+          <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))"></div>
+          <div style="width:5px;height:5px;background:var(--gold);transform:rotate(45deg)"></div>
+          <div style="flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)"></div>
+        </div>
+        <p style="font-family:var(--serif);font-size:1.18rem;line-height:1.88;color:rgba(245,240,232,.78);margin-bottom:20px;font-weight:300">
+          <em>Aurum</em> — Latin for gold — is our promise. Not in palette alone, but in every grain of coffee, every fold of pastry, and every moment you spend with us in Al Furjan.
+        </p>
+        <p style="font-family:var(--sans);font-size:.87rem;line-height:1.9;color:var(--mu);font-weight:300;margin-bottom:34px">
+          Born from a desire to create a space where the neighbourhood comes together — Aurum serves up Lebanese and Mediterranean cuisine, specialty grills, fresh salads, wood-fired pizza and artisan coffee, all under one roof in Discovery Gardens.
+        </p>
+        <button onclick="navTo('reserve')"
+          onmouseenter="this.style.background='var(--gold)';this.style.color='var(--ch)'"
+          onmouseleave="this.style.background='transparent';this.style.color='var(--gold)'"
+          style="display:inline-flex;align-items:center;gap:9px;background:transparent;color:var(--gold);font-family:var(--sans);font-size:.72rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:12px 26px;border:1px solid rgba(201,168,76,.38);border-radius:2px;transition:all .25s">
+          Reserve a Table
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </div>
+      <div class="rv d2" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:38px">
+        <div style="background:var(--ch2);padding:24px 18px;border-bottom:1px solid rgba(201,168,76,.06)">
+          <div style="font-family:var(--serif);font-size:2.4rem;color:var(--gold);font-weight:300;line-height:1;margin-bottom:6px">4.4</div>
+          <div style="font-family:var(--sans);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)">Talabat Rating</div>
+        </div>
+        <div style="background:var(--ch2);padding:24px 18px;border-bottom:1px solid rgba(201,168,76,.06)">
+          <div style="font-family:var(--serif);font-size:2.4rem;color:var(--gold);font-weight:300;line-height:1;margin-bottom:6px">100+</div>
+          <div style="font-family:var(--sans);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)">Reviews</div>
+        </div>
+        <div style="background:var(--ch2);padding:24px 18px;border-bottom:1px solid rgba(201,168,76,.06)">
+          <div style="font-family:var(--serif);font-size:2.4rem;color:var(--gold);font-weight:300;line-height:1;margin-bottom:6px">40+</div>
+          <div style="font-family:var(--sans);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)">Menu Items</div>
+        </div>
+        <div style="background:var(--ch2);padding:24px 18px;border-bottom:1px solid rgba(201,168,76,.06)">
+          <div style="font-family:var(--serif);font-size:2.4rem;color:var(--gold);font-weight:300;line-height:1;margin-bottom:6px">18h</div>
+          <div style="font-family:var(--sans);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)">Open Daily</div>
+        </div>
+      </div>
+    </div>
+    <div class="rv d3 sw" style="position:relative;height:clamp(480px,68vh,740px)">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=900&q=80" alt="Fine dining at Aurum" style="width:100%;height:100%;object-fit:cover;object-position:center;border-radius:2px" />
+      <div style="position:absolute;bottom:-14px;left:-14px;width:55%;height:3px;background:var(--gold)"></div>
+      <div style="position:absolute;bottom:-14px;left:-14px;width:3px;height:38%;background:var(--gold)"></div>
+      <div style="position:absolute;bottom:26px;right:-18px;background:var(--ch);border:1px solid rgba(201,168,76,.22);padding:13px 18px">
+        <div style="font-family:var(--serif);font-style:italic;font-size:.86rem;color:var(--gold);margin-bottom:3px">"Golden by Nature"</div>
+        <div style="font-family:var(--sans);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--mu)">Aurum Kitchen Philosophy</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        function App() {
-            const [activeTab, setActiveTab] = useState('Breakfast');
+<!-- MENU -->
+<section id="menu" style="background:var(--ch2);padding:clamp(80px,12vw,144px) clamp(18px,5vw,64px);position:relative;overflow:hidden">
+  <span class="ghost" style="top:-10px;left:-6px">02</span>
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="rv" style="margin-bottom:46px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <span style="font-family:var(--serif);font-size:.8rem;color:var(--gold);letter-spacing:.15em">02</span>
+        <div style="width:28px;height:1px;background:var(--gold)"></div>
+        <span style="font-family:var(--sans);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mu)">The Menu</span>
+      </div>
+      <h2 style="font-family:var(--serif);font-size:clamp(36px,7vw,74px);font-weight:300;line-height:1.06;letter-spacing:-.015em">
+        Crafted with<br><em style="color:var(--gold)">Golden Intention</em>
+      </h2>
+    </div>
+    <div id="menu-tabs" style="display:flex;border-bottom:1px solid rgba(201,168,76,.13);overflow-x:auto;margin-bottom:0"></div>
+    <div id="menu-banner" style="position:relative;overflow:hidden;height:200px;margin-bottom:30px"></div>
+    <div id="menu-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:3px"></div>
+    <div style="text-align:center;margin-top:40px">
+      <p style="font-family:var(--serif);font-style:italic;color:var(--mu);font-size:.86rem">Lebanese &amp; Mediterranean cuisine. Ask staff for current prices &amp; daily specials.</p>
+    </div>
+  </div>
+</section>
 
-            return (
-                <div className="min-h-screen">
-                    {/* Navigation */}
-                    <nav className="fixed w-full z-50 p-6 flex justify-between items-center bg-[#111]/80 backdrop-blur-md border-b border-[#C9A84C]/10">
-                        <div className="font-serif text-2xl tracking-widest text-[#C9A84C]">AURUM</div>
-                        <div className="hidden md:flex gap-8 text-[10px] uppercase tracking-[0.3em]">
-                            <a href="#story" className="hover:text-[#C9A84C]">Story</a>
-                            <a href="#menu" className="hover:text-[#C9A84C]">Menu</a>
-                            <a href="#gallery" className="hover:text-[#C9A84C]">Gallery</a>
-                        </div>
-                        <button className="bg-[#C9A84C] text-[#111] px-6 py-2 text-[10px] font-bold uppercase tracking-widest">Reserve</button>
-                    </nav>
+<!-- GALLERY -->
+<section id="gallery" style="background:var(--ch);padding:clamp(80px,12vw,144px) clamp(18px,5vw,64px);position:relative;overflow:hidden">
+  <span class="ghost" style="top:-10px;right:-6px">03</span>
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="rv" style="margin-bottom:48px">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <span style="font-family:var(--serif);font-size:.8rem;color:var(--gold);letter-spacing:.15em">03</span>
+        <div style="width:28px;height:1px;background:var(--gold)"></div>
+        <span style="font-family:var(--sans);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mu)">Gallery</span>
+      </div>
+      <h2 style="font-family:var(--serif);font-size:clamp(36px,7vw,74px);font-weight:300;line-height:1.06;letter-spacing:-.015em">
+        Life at<br><em style="color:var(--gold)">Aurum</em>
+      </h2>
+    </div>
+    <div class="gg" style="display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:4px">
+      <div class="gi" style="grid-column:span 2;grid-row:span 2"><img src="https://images.unsplash.com/photo-1550966871-3ed3cba5831f?w=900&q=75" alt="The Interior" /><div class="glabel"><span>The Interior</span></div></div>
+      <div class="gi" style="grid-column:span 1;grid-row:span 1"><img src="https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=600&q=75" alt="Breakfast" /><div class="glabel"><span>Breakfast</span></div></div>
+      <div class="gi" style="grid-column:span 1;grid-row:span 1"><img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=75" alt="Evening Ambiance" /><div class="glabel"><span>Evening Ambiance</span></div></div>
+      <div class="gi" style="grid-column:span 1;grid-row:span 1"><img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=75" alt="Specialty Coffee" /><div class="glabel"><span>Specialty Coffee</span></div></div>
+      <div class="gi" style="grid-column:span 1;grid-row:span 1"><img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=800&q=75" alt="Pizza" /><div class="glabel"><span>Pizza</span></div></div>
+      <div class="gi" style="grid-column:span 1;grid-row:span 1"><img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=600&q=75" alt="Grills" /><div class="glabel"><span>Grills</span></div></div>
+      <div class="gi" style="grid-column:span 1;grid-row:span 1"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=75" alt="Burgers" /><div class="glabel"><span>Burgers</span></div></div>
+      <div class="gi" style="grid-column:span 2;grid-row:span 2"><img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?w=900&q=75" alt="The Bar" /><div class="glabel"><span>The Bar</span></div></div>
+    </div>
+    <div style="text-align:center;margin-top:30px">
+      <button style="display:inline-flex;align-items:center;gap:8px;color:var(--gold);font-family:var(--sans);font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;background:none;border:none;border-bottom:1px solid rgba(201,168,76,.28);padding-bottom:3px">
+        Follow @aurumcafe_ae
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
 
-                    {/* Hero Section */}
-                    <section className="relative h-screen flex items-center justify-center overflow-hidden">
-                        <img src={IMG.hero} className="absolute inset-0 w-full h-full object-cover kb" alt="Hero" />
-                        <div className="absolute inset-0 bg-black/50" />
-                        <div className="relative text-center z-10 px-6">
-                            <h1 className="text-7xl md:text-9xl font-serif shimmer mb-4">Aurum</h1>
-                            <p className="italic text-xl text-white/70 max-w-lg mx-auto">Where community warmth meets refined dining.</p>
-                        </div>
-                    </section>
+<!-- RESERVATION -->
+<section id="reserve" style="background:var(--ch2);padding:clamp(80px,12vw,144px) clamp(18px,5vw,64px);position:relative;overflow:hidden">
+  <span class="ghost" style="top:-10px;left:-6px">04</span>
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:clamp(44px,7vw,88px);align-items:start">
+    <div class="rv">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+        <span style="font-family:var(--serif);font-size:.8rem;color:var(--gold);letter-spacing:.15em">04</span>
+        <div style="width:28px;height:1px;background:var(--gold)"></div>
+        <span style="font-family:var(--sans);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mu)">Reserve</span>
+      </div>
+      <h2 style="font-family:var(--serif);font-size:clamp(36px,6vw,62px);font-weight:300;line-height:1.06;letter-spacing:-.015em;margin-bottom:22px">
+        Reserve<br><em style="color:var(--gold)">Your Table</em>
+      </h2>
+      <p style="font-family:var(--sans);font-size:.87rem;color:var(--mu);line-height:1.82;margin-bottom:34px">
+        For groups of 8 or more, or to arrange a private dining experience, please call us directly. We'll ensure every detail is flawless.
+      </p>
+      <div style="display:flex;flex-direction:column;gap:15px;margin-bottom:32px">
+        <div style="display:flex;align-items:center;gap:13px">
+          <div style="width:34px;height:34px;border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <span style="font-family:var(--sans);font-size:.85rem;color:var(--mu);font-weight:300">The Pavilion, 7 Street, Discovery Gardens, Dubai</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:13px">
+          <div style="width:34px;height:34px;border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.6a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <span style="font-family:var(--sans);font-size:.85rem;color:var(--mu);font-weight:300">+971 50 555 6808</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:13px">
+          <div style="width:34px;height:34px;border:1px solid rgba(201,168,76,.25);display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <span style="font-family:var(--sans);font-size:.85rem;color:var(--mu);font-weight:300">Open daily 8:00 AM – 2:00 AM</span>
+        </div>
+      </div>
+      <div style="position:relative;height:220px;border:1px solid rgba(201,168,76,.1);overflow:hidden">
+        <iframe title="Aurum Restaurant The Pavilion Discovery Gardens Dubai"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3612.282!2d55.14481317651699!3d25.035294!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f72001ed62cc1%3A0x6ed5b1b3db5ef14e!2sAurum%20Restaurant%20%26%20Cafe!5e0!3m2!1sen!2sae!4v1750000000000!5m2!1sen!2sae"
+          width="100%" height="220" style="border:0;filter:invert(90%) hue-rotate(180deg) saturate(.65) brightness(.82);display:block"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div style="position:absolute;top:0;left:0;width:18px;height:2px;background:var(--gold)"></div>
+        <div style="position:absolute;top:0;left:0;width:2px;height:18px;background:var(--gold)"></div>
+        <div style="position:absolute;bottom:0;right:0;width:18px;height:2px;background:var(--gold)"></div>
+        <div style="position:absolute;bottom:0;right:0;width:2px;height:18px;background:var(--gold)"></div>
+      </div>
+    </div>
+    <div class="rv d2" style="background:var(--ch);padding:clamp(24px,4vw,42px);border:1px solid rgba(201,168,76,.09)">
+      <div id="form-success" style="display:none;text-align:center;padding:60px 0">
+        <div style="width:54px;height:54px;border:1px solid var(--gold);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 22px">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h3 style="font-family:var(--serif);font-size:1.65rem;color:var(--gold);margin-bottom:10px;font-weight:300">Reservation Received</h3>
+        <p style="font-family:var(--sans);font-size:.84rem;color:var(--mu)">We'll confirm your table within 24 hours.</p>
+      </div>
+      <form id="reservation-form" onsubmit="submitForm(event)" style="display:flex;flex-direction:column;gap:12px">
+        <div style="font-family:var(--serif);font-size:1.4rem;font-weight:300;color:var(--cr);margin-bottom:2px">Table Reservation</div>
+        <div style="display:flex;align-items:center;gap:12px;margin:10px 0">
+          <div style="flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold))"></div>
+          <div style="width:5px;height:5px;background:var(--gold);transform:rotate(45deg)"></div>
+          <div style="flex:1;height:1px;background:linear-gradient(90deg,var(--gold),transparent)"></div>
+        </div>
+        <div class="fg" style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <input class="inp" placeholder="Full Name" required />
+          <input class="inp" type="email" placeholder="Email Address" required />
+          <input class="inp" type="tel" placeholder="Phone Number" />
+          <select class="inp">
+            <option>1 Guest</option><option selected>2 Guests</option><option>3 Guests</option>
+            <option>4 Guests</option><option>5 Guests</option><option>6 Guests</option>
+            <option>7 Guests</option><option>8 Guests</option>
+          </select>
+          <input class="inp" type="date" required />
+          <select class="inp" required>
+            <option value="">Preferred Time</option>
+            <option>08:00</option><option>09:00</option><option>10:00</option><option>11:00</option>
+            <option>12:00</option><option>13:00</option><option>14:00</option><option>15:00</option>
+            <option>18:00</option><option>19:00</option><option>20:00</option><option>21:00</option><option>22:00</option>
+          </select>
+        </div>
+        <textarea class="inp" rows="3" placeholder="Special requests or dietary requirements..." style="resize:vertical"></textarea>
+        <button type="submit" onmouseenter="this.style.background='var(--gold-lt)'" onmouseleave="this.style.background='var(--gold)'"
+          style="background:var(--gold);color:var(--ch);font-family:var(--sans);font-size:.73rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;border:none;padding:15px;margin-top:4px;border-radius:2px;transition:background .25s">Confirm Reservation</button>
+      </form>
+    </div>
+  </div>
+</section>
 
-                    {/* Story Section */}
-                    <section id="story" className="py-24 px-6 relative bg-[#111]">
-                        <span className="ghost top-10 right-10">01</span>
-                        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-                            <div className="rv in">
-                                <h2 className="text-5xl font-serif mb-6">The Meaning of <span className="text-[#C9A84C]">Aurum</span></h2>
-                                <p className="text-[#88887f] leading-relaxed mb-6">Latin for gold — it is our promise. Not just in color, but in the quality of every grain of coffee and every fold of pastry served here in Al Furjan.</p>
-                                <div className="h-1 w-20 bg-[#C9A84C]" />
-                            </div>
-                            <img src={IMG.story} className="rounded-sm shadow-2xl" alt="Story" />
-                        </div>
-                    </section>
+<!-- FOOTER -->
+<footer style="background:var(--ch);border-top:1px solid rgba(201,168,76,.09)">
+  <div style="padding:clamp(56px,8vw,96px) clamp(18px,5vw,64px);display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:clamp(32px,5vw,56px);max-width:1100px;margin:0 auto">
+    <div>
+      <div style="font-family:var(--serif);font-size:2rem;font-weight:300;letter-spacing:.14em;color:var(--gold);line-height:1">AURUM</div>
+      <div style="font-size:.52rem;letter-spacing:.36em;color:var(--mu);text-transform:uppercase;margin-top:2px;margin-bottom:14px">Restaurant &amp; Cafe</div>
+      <p style="font-family:var(--sans);font-size:.81rem;color:var(--mu);line-height:1.82;font-weight:300;max-width:215px">Al Furjan's destination for Lebanese &amp; Mediterranean dining and specialty coffee, rooted in community.</p>
+      <div style="display:flex;gap:9px;margin-top:18px">
+        <a href="#" onmouseenter="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseleave="this.style.borderColor='rgba(201,168,76,.16)';this.style.color='var(--mu)'" style="width:32px;height:32px;border:1px solid rgba(201,168,76,.16);display:flex;align-items:center;justify-content:center;color:var(--mu);border-radius:2px;transition:all .25s"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        <a href="#" onmouseenter="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseleave="this.style.borderColor='rgba(201,168,76,.16)';this.style.color='var(--mu)'" style="width:32px;height:32px;border:1px solid rgba(201,168,76,.16);display:flex;align-items:center;justify-content:center;color:var(--mu);border-radius:2px;transition:all .25s"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Opening Hours</div>
+      <div style="margin-bottom:11px;padding-bottom:11px;border-bottom:1px solid rgba(255,255,255,.04)">
+        <div style="font-family:var(--sans);font-size:.74rem;color:var(--mu);margin-bottom:1px">Every Day</div>
+        <div style="font-family:var(--serif);font-size:.9rem;color:var(--cr);font-style:italic">8:00 AM – 2:00 AM</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Navigate</div>
+      <button onclick="navTo('story')"   onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='var(--mu)'" style="display:block;width:100%;text-align:left;font-family:var(--sans);font-size:.81rem;color:var(--mu);background:none;border:none;margin-bottom:9px;font-weight:300;transition:color .25s;padding:0">Our Story</button>
+      <button onclick="navTo('menu')"    onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='var(--mu)'" style="display:block;width:100%;text-align:left;font-family:var(--sans);font-size:.81rem;color:var(--mu);background:none;border:none;margin-bottom:9px;font-weight:300;transition:color .25s;padding:0">The Menu</button>
+      <button onclick="navTo('gallery')" onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='var(--mu)'" style="display:block;width:100%;text-align:left;font-family:var(--sans);font-size:.81rem;color:var(--mu);background:none;border:none;margin-bottom:9px;font-weight:300;transition:color .25s;padding:0">Gallery</button>
+      <button onclick="navTo('reserve')" onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='var(--mu)'" style="display:block;width:100%;text-align:left;font-family:var(--sans);font-size:.81rem;color:var(--mu);background:none;border:none;margin-bottom:9px;font-weight:300;transition:color .25s;padding:0">Reserve a Table</button>
+    </div>
+    <div>
+      <div style="font-family:var(--sans);font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">The Golden Letter</div>
+      <p style="font-family:var(--sans);font-size:.81rem;color:var(--mu);line-height:1.78;margin-bottom:14px;font-weight:300">Seasonal menus, private events &amp; exclusive offers — straight to your inbox.</p>
+      <div id="nl-success" style="display:none;font-family:var(--serif);font-style:italic;color:var(--gold);font-size:.93rem">Welcome to the circle &#10022;</div>
+      <div id="nl-form" style="display:flex;flex-direction:column;gap:8px">
+        <input class="inp" type="email" id="nl-email" placeholder="Your email address" />
+        <button onclick="subscribeNL()" onmouseenter="this.style.background='var(--gold)';this.style.color='var(--ch)'" onmouseleave="this.style.background='transparent';this.style.color='var(--gold)'"
+          style="background:transparent;border:1px solid var(--gold);color:var(--gold);font-family:var(--sans);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;padding:11px;border-radius:2px;transition:all .25s">Subscribe</button>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(201,168,76,.06);padding:16px clamp(18px,5vw,64px);display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;max-width:1100px;margin:0 auto">
+    <span id="footer-year" style="font-family:var(--sans);font-size:.68rem;color:var(--mu)"></span>
+    <div style="display:flex;gap:18px">
+      <a href="#" onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='var(--mu)'" style="font-family:var(--sans);font-size:.68rem;color:var(--mu);transition:color .25s">Privacy Policy</a>
+      <a href="#" onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='var(--mu)'" style="font-family:var(--sans);font-size:.68rem;color:var(--mu);transition:color .25s">Terms</a>
+      <a href="#" onmouseenter="this.style.color='var(--gold)'" onmouseleave="this.style.color='var(--mu)'" style="font-family:var(--sans);font-size:.68rem;color:var(--mu);transition:color .25s">Allergen Info</a>
+    </div>
+  </div>
+</footer>
 
-                    {/* Menu Section */}
-                    <section id="menu" className="py-24 px-6 bg-[#1c1c1c] relative">
-                        <span className="ghost top-10 left-10">02</span>
-                        <div className="max-w-5xl mx-auto text-center mb-12">
-                            <h2 className="text-5xl font-serif mb-4">The <span className="text-[#C9A84C]">Menu</span></h2>
-                            <div className="flex justify-center gap-6 border-b border-[#C9A84C]/20 mb-12">
-                                {Object.keys(MENU_DATA).map(tab => (
-                                    <button 
-                                        key={tab}
-                                        onClick={() => setActiveTab(tab)}
-                                        className={`pb-4 text-[10px] uppercase tracking-widest ${activeTab === tab ? 'text-[#C9A84C] border-b-2 border-[#C9A84C]' : 'text-[#88887f]'}`}
-                                    >
-                                        {tab}
-                                    </button>
-                                ))}
-                            </div>
-                            <div className="grid md:grid-cols-2 gap-6 text-left">
-                                {MENU_DATA[activeTab].map((item, i) => (
-                                    <div key={i} className="mc p-6 bg-[#111]">
-                                        <div className="flex justify-between items-baseline mb-2">
-                                            <h3 className="font-serif text-xl">{item.name}</h3>
-                                            <span className="text-[#C9A84C] italic">{item.price}</span>
-                                        </div>
-                                        <p className="text-xs text-[#88887f]">{item.desc}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </section>
+<script>
+var MENU_DATA = {
+  "Breakfast": {
+    img: "https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?w=1400&q=75",
+    items: [
+      { name:"English Breakfast",        desc:"Egg on your way, brioche bread, sausage, beef bacon, hash brown potato, fresh mushroom, baked beans.", chef:true },
+      { name:"Eggs Benedict",            desc:"Brioche bread with a poached egg, slice of beef bacon, guacamole, and hollandaise sauce.", chef:true },
+      { name:"Eggs Royale",              desc:"Brioche bread with a poached egg, slice of turkey breast, cream cheese and hollandaise sauce.", chef:false },
+      { name:"Acai Bowl",                desc:"Strawberry, baked granola, raspberry, blueberry, blackberry.", chef:false },
+      { name:"Granola Bowl",             desc:"Baked granola, homemade peanut butter, roasted peanuts, banana, chia seeds, almond flakes, cacao nibs.", chef:false }
+    ]
+  },
+  "Starters": {
+    img: "https://images.unsplash.com/photo-1484723091739-30a097e8f929?w=1400&q=75",
+    items: [
+      { name:"Hummus",                   desc:"Smooth and creamy puree of cooked chickpeas, mixed with tahini and lemon juice, served with warm bread.", chef:true },
+      { name:"Baba Ghanoush",            desc:"Grilled eggplant, tahini, lemon juice, red radish.", chef:false },
+      { name:"Calamari",                 desc:"Breaded deep fried calamari rings, tartar sauce.", chef:false },
+      { name:"Dynamite Shrimp",          desc:"Deep fried crispy tempura shrimp tossed in special dynamite sauce.", chef:true },
+      { name:"Chicken Wings",            desc:"BBQ buffalo chicken wings served with blue cheese dip.", chef:false },
+      { name:"Mussels",                  desc:"Mussels sauteed with garlic and butter, served with toast bread.", chef:false }
+    ]
+  },
+  "Salads": {
+    img: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1400&q=75",
+    items: [
+      { name:"Chicken Caesar Salad",     desc:"Grilled chicken breast, spicy chipotle sauce, lettuce, avocado, corn, diced tomatoes, parmesan cheese.", chef:true },
+      { name:"Shrimp Salad",             desc:"Grilled shrimp skewers with greens, avocado, tortilla strips, feta cheese, cherry tomatoes.", chef:false },
+      { name:"Halloumi Salad",           desc:"Fresh grilled halloumi cheese, crisp vegetables and greens, drizzled with zesty lemon-olive oil dressing.", chef:false },
+      { name:"Fattoush",                 desc:"Lettuce, cucumber, tomato, green leaves, crispy bread, fattoush sauce.", chef:false },
+      { name:"Tabbouleh",                desc:"Parsley, tomato, burghul, lemon juice, olive oil, onion.", chef:false },
+      { name:"Falafel Salad",            desc:"Crispy falafel over fresh greens, cucumbers, tomatoes and onions, drizzled with creamy tahini dressing.", chef:false }
+    ]
+  },
+  "Grills": {
+    img: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1400&q=75",
+    items: [
+      { name:"Mix Grill Plate",          desc:"Beef tikka, shish taouk and kabab halabi served with french fries and hummus plate.", chef:true },
+      { name:"Grilled Chicken",          desc:"Half or full grilled chicken marinated with our homemade marination, served with grilled potato and garlic sauce.", chef:true },
+      { name:"Shish Tawook Plate",       desc:"Marinated chicken skewers grilled to perfection, served with rice and garlic sauce.", chef:false },
+      { name:"Lebanese Kofta Plate",     desc:"Lamb minced meat, Arabic spices, bewaz, grilled vegetables, fries.", chef:false },
+      { name:"Salmon Fillet",            desc:"Salmon fillet, sauteed vegetables, lemon rice, dill saffron cream sauce.", chef:false },
+      { name:"Grilled Shrimp Skewers",   desc:"Four grilled shrimp skewers with bell pepper and red onions, served with rice.", chef:false }
+    ]
+  },
+  "Pizza": {
+    img: "https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=1400&q=75",
+    items: [
+      { name:"Prosciutto Funghi",        desc:"Tomato sauce, Italian mozzarella, turkey ham, fresh mushroom.", chef:true },
+      { name:"Pepperoni",                desc:"Tomato sauce, Italian mozzarella, beef pepperoni.", chef:true },
+      { name:"Margherita",               desc:"Tomato sauce, Italian mozzarella, parmigiano and fresh basil leaves.", chef:false },
+      { name:"Vegetarian",               desc:"Tomato sauce, Italian mozzarella, mixed bell pepper, roasted red onion, fresh mushroom.", chef:false },
+      { name:"Seafood Pizza",            desc:"Tomato sauce, Italian mozzarella with premium mixed seafood.", chef:false }
+    ]
+  },
+  "Sandwiches": {
+    img: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=1400&q=75",
+    items: [
+      { name:"Lebanese Burger",          desc:"Signature burger - beef patty, coleslaw, grilled tomato, pickles, fries, grilled onion, hummus.", chef:true },
+      { name:"Mushroom Burger",          desc:"Beef patty, lettuce, mushroom, caramelized onion, bacon, pickles, cheese, smoked cocktail sauce, fries.", chef:true },
+      { name:"Classic Beef Burger",      desc:"Beef patty, lettuce, tomato, pickles, smoked cocktail sauce, fries.", chef:false },
+      { name:"Grilled Chicken Sandwich", desc:"Grilled chicken breast, lettuce, pickles, fries.", chef:false },
+      { name:"Lamb Shawarma",            desc:"Pitta bread, bewaz, shredded lamb shawarma meat, tahini sauce, tomato, fries.", chef:false },
+      { name:"Club Sandwich",            desc:"Roast chicken, beef bacon, egg, lettuce, tomato, pickles, garlic mayo, fries.", chef:false }
+    ]
+  }
+};
 
-                    {/* Footer */}
-                    <footer className="py-12 border-t border-[#C9A84C]/10 text-center bg-[#111]">
-                        <div className="font-serif text-[#C9A84C] text-xl mb-4">AURUM</div>
-                        <p className="text-[10px] uppercase tracking-[0.5em] text-[#88887f]">Al Furjan, Dubai | Open Daily</p>
-                    </footer>
-                </div>
-            );
-        }
+function navTo(id) {
+  var el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior:"smooth", block:"start" });
+}
 
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(<App />);
-    </script>
+var mobOpen = false;
+function toggleMobile() {
+  mobOpen = !mobOpen;
+  document.getElementById("mob-menu").style.display = mobOpen ? "block" : "none";
+  document.getElementById("ico-open").style.display  = mobOpen ? "none"  : "block";
+  document.getElementById("ico-close").style.display = mobOpen ? "block" : "none";
+}
+function closeMobile() {
+  mobOpen = false;
+  document.getElementById("mob-menu").style.display = "none";
+  document.getElementById("ico-open").style.display  = "block";
+  document.getElementById("ico-close").style.display = "none";
+}
+
+window.addEventListener("scroll", function() {
+  var nav = document.getElementById("main-nav");
+  if (window.scrollY > 55) {
+    nav.style.background = "rgba(17,17,17,.94)";
+    nav.style.backdropFilter = "blur(16px)";
+    nav.style.borderBottomColor = "rgba(201,168,76,.13)";
+  } else {
+    nav.style.background = "transparent";
+    nav.style.backdropFilter = "none";
+    nav.style.borderBottomColor = "transparent";
+  }
+}, { passive:true });
+
+var observer = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add("in"); observer.unobserve(e.target); }
+  });
+}, { threshold:0.08 });
+document.querySelectorAll(".rv").forEach(function(el) { observer.observe(el); });
+
+function renderMenu(tab) {
+  var data = MENU_DATA[tab];
+  var keys = Object.keys(MENU_DATA);
+
+  document.getElementById("menu-tabs").innerHTML = keys.map(function(t) {
+    var on = t === tab;
+    return '<button onclick="renderMenu(\'' + t + '\')" class="tb' + (on ? ' on' : '') + '" style="background:none;border:none;font-family:var(--sans);font-size:.73rem;letter-spacing:.16em;text-transform:uppercase;color:' + (on ? 'var(--gold)' : 'var(--mu)') + ';padding:13px 22px;white-space:nowrap;font-weight:' + (on ? 500 : 300) + '">' + t + '</button>';
+  }).join("");
+
+  document.getElementById("menu-banner").innerHTML =
+    '<img src="' + data.img + '" alt="' + tab + '" style="width:100%;height:100%;object-fit:cover;object-position:center 40%;filter:brightness(.5) saturate(.75)" />'
+    + '<div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(0,0,0,.5),transparent 60%)"></div>'
+    + '<div style="position:absolute;bottom:20px;left:24px">'
+    + '<div style="font-family:var(--serif);font-style:italic;font-size:clamp(1.6rem,4vw,2.8rem);color:var(--cr);font-weight:300;line-height:1">' + tab + '</div>'
+    + '<div style="font-family:var(--sans);font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-top:5px">Aurum Kitchen</div>'
+    + '</div>';
+
+  document.getElementById("menu-cards").innerHTML = data.items.map(function(item) {
+    var badge = item.chef
+      ? '<div style="position:absolute;top:13px;right:13px;display:flex;align-items:center;gap:5px;background:rgba(201,168,76,.09);border:1px solid rgba(201,168,76,.25);padding:4px 9px;border-radius:2px"><svg width="8" height="8" viewBox="0 0 24 24" fill="var(--gold)"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg><span style="font-family:var(--sans);font-size:.57rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold)">Best Seller</span></div>'
+      : '';
+    return '<div class="mc" style="background:var(--ch);padding:26px 22px;border:1px solid rgba(201,168,76,.07);position:relative">'
+      + badge
+      + '<h3 style="font-family:var(--serif);font-size:1.18rem;font-weight:400;color:var(--cr);margin-bottom:8px;padding-right:' + (item.chef ? 90 : 0) + 'px">' + item.name + '</h3>'
+      + '<p style="font-family:var(--sans);font-size:.81rem;color:var(--mu);line-height:1.7;font-weight:300">' + item.desc + '</p>'
+      + '</div>';
+  }).join("");
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  document.getElementById("reservation-form").style.display = "none";
+  document.getElementById("form-success").style.display = "block";
+  setTimeout(function() {
+    document.getElementById("form-success").style.display = "none";
+    document.getElementById("reservation-form").style.display = "flex";
+    document.getElementById("reservation-form").reset();
+  }, 5000);
+}
+
+function subscribeNL() {
+  if (document.getElementById("nl-email").value) {
+    document.getElementById("nl-form").style.display = "none";
+    document.getElementById("nl-success").style.display = "block";
+  }
+}
+
+document.getElementById("footer-year").textContent = "© " + new Date().getFullYear() + " Aurum Restaurant & Cafe, Al Furjan, Dubai.";
+renderMenu("Breakfast");
+</script>
 </body>
 </html>
